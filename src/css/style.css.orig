@@ -4,7 +4,7 @@ html {
 
 body {
 	width: 100%;
-	/*min-width: 1900px;*/
+	min-width: 1900px;
 	font-smooth: auto;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
@@ -164,7 +164,7 @@ span.small-title span.small {
 }
 
 .blocks-holder {
-	width: 100%;
+	width: 288px;
 	padding-top: 6px;
 	margin-left: -2px;
 }

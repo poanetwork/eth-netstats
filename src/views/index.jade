@@ -64,23 +64,23 @@ block content
           div.col-xs-2.stat-holder.box
 
         div.row
-          div.col-xs-12
+          div.col-xs-8
             div.row
-              div.col-xs-2.stat-holder
+              div.col-xs-3.stat-holder
                 div.big-info.chart(class="{{ avgBlockTime | avgTimeClass }}")
                   //- i.icon-time
                   span.small-title block time
                   //- span.small-value {{ avgBlockTime | avgTimeFilter }}
                   sparkchart.big-details.spark-blocktimes(data="{{lastBlocksTime.join(',')}}", tooltipsuffix="s")
 
-              div.col-xs-2.stat-holder
+              div.col-xs-3.stat-holder
                 div.big-info.chart.xdouble-chart(class="{{ blockPropagationAvg | propagationAvgTimeClass : true }}")
                   //- i.icon-gas
                   span.small-title block propagation
                   //- span.small-value {{ blockPropagationAvg | blockPropagationFilter : '' }}
                   histogram.big-details.d3-blockpropagation(data="blockPropagationChart")
 
-              div.col-xs-2.stat-holder
+              div.col-xs-3.stat-holder
                 div.big-info.chart.xdouble-chart
                   span.small-title last blocks miners
                   div.blocks-holder(ng-repeat='miner in miners track by miner.miner', data-toggle="tooltip", data-placement="right", data-original-title="{{miner.blocks}}")
@@ -90,41 +90,24 @@ block content
                     minerblock(blocks="{{miner.blocks}}")
                     div.clearfix
 
-              div.col-xs-2.stat-holder
+              div.col-xs-3.stat-holder
                 div.big-info.chart.text-info
                   //- i.icon-uncle
                   span.small-title transactions
                   sparkchart.big-details.spark-transactions(data="{{transactionDensity.join(',')}}")
 
-              div.col-xs-2.stat-holder
+              div.col-xs-3.stat-holder
                 div.big-info.chart.text-info
                   //- i.icon-gasprice
                   span.small-title gas spending
                   sparkchart.big-details.spark-gasspending(data="{{gasSpending.join(',')}}")
 
-              div.col-xs-2.stat-holder
+              div.col-xs-3.stat-holder
                 div.big-info.chart.text-info
                   //- i.icon-difficulty
                   span.small-title gas limit
                   //- span.small-value {{ lastDifficulty | number }}
                   sparkchart.big-details.spark-difficulty(data="{{lastGasLimit.join(',')}}")
-
-
-
-    div.row
-      div.col-xs-12.stats-boxes
-        div.row.second-row
-          div.col-xs-12.stat-holder.box
-            div.active-nodes.text-warning
-              i.icon-warning-o
-              span.small-title ATTENTION!
-              span.small-value This page does not represent the entire state of the ethereum network - listing a node on this page is a voluntary process.
-          //- div.col-xs-12.stat-holder.box
-          //-   div.active-nodes.text-danger
-          //-     i.icon-hashrate
-          //-     span.small-title SECURITY ALERT
-          //-     span.small-value
-          //-       a(href="https://blog.ethereum.org/2015/09/10/security-alert-previous-security-patch-can-lead-to-invalid-state-root-on-go-clients-with-a-specific-transaction-sequence-fixed-please-update/", target="_blank", class="text-danger") Read the blog post
 
 
       //- div.clearfix
@@ -142,25 +125,18 @@ block content
             th.th-latency
               i.icon-clock(data-toggle="tooltip", data-placement="top", title="Node latency", ng-click="orderTable(['stats.latency'], false)")
             th
-              i.icon-mining(data-toggle="tooltip", data-placement="top", title="Is mining", ng-click="orderTable(['-stats.hashrate'], false)")
-            th
               i.icon-group(data-toggle="tooltip", data-placement="top", title="Peers", ng-click="orderTable(['-stats.peers'], false)")
             th
               i.icon-network(data-toggle="tooltip", data-placement="top", title="Pending transactions", ng-click="orderTable(['-stats.pending'], false)")
             th
               i.icon-block(data-toggle="tooltip", data-placement="top", title="Last block", ng-click="orderTable(['-stats.block.number', 'stats.block.propagation'], false)")
             th.th-blockhash &nbsp;
-            th.th-blockhash
-              i.icon-difficulty(data-toggle="tooltip", data-placement="top", title="Total difficulty", ng-click="orderTable(['-stats.block.totalDifficulty'], false)")
             th
               i.icon-check-o(data-toggle="tooltip", data-placement="top", title="Block transactions", ng-click="orderTable(['-stats.block.transactions.length'], false)")
-            th
-              i.icon-uncle(data-toggle="tooltip", data-placement="top", title="Uncles", ng-click="orderTable(['-stats.block.uncles.length'], false)")
             th.th-blocktime
               i.icon-time(data-toggle="tooltip", data-placement="top", title="Last block time", ng-click="orderTable(['-stats.block.received'], false)")
             th.th-peerPropagationTime
               i.icon-gas(data-toggle="tooltip", data-placement="top", title="Propagation time", ng-click="orderTable(['-stats.block.number', 'stats.block.propagation'], false)")
-            th.th-peerPropagationChart
             th.th-peerPropagationAvg
               i.icon-gas(data-toggle="tooltip", data-placement="top", title="Average propagation time", ng-click="orderTable(['stats.propagationAvg'], false)")
             th
@@ -178,7 +154,6 @@ block content
               div.small(ng-bind-html="node.info.node | nodeVersion")
             td(class="{{ node.readable.latencyClass }}")
               span.small {{ node.readable.latency }}
-            td(class="{{ node.stats.mining | hashrateClass : node.stats.active }}", ng-bind-html="node.stats.hashrate | hashrateFilter : node.stats.mining")
             td(class="{{ node.stats.peers | peerClass : node.stats.active }}", style="padding-left: 11px;") {{node.stats.peers}}
             td(style="padding-left: 15px;") {{node.stats.pending}}
             td(class="{{ node.stats | blockClass : bestBlock }}")
@@ -187,15 +162,10 @@ block content
                 i.icon-warning-o
             td(class="{{ node.stats | blockClass : bestBlock }}")
               span.small {{node.stats.block.hash | hashFilter}}
-            td(class="{{ node.stats | blockClass : bestBlock }}")
-              span.small {{node.stats.block.totalDifficulty | number}}
             td(style="padding-left: 14px;") {{node.stats.block.transactions.length || 0}}
-            td(style="padding-left: 14px;") {{node.stats.block.uncles.length || 0}}
             td(class="{{ node.stats.block.received | timeClass : node.stats.active }}") {{node.stats.block.received | blockTimeFilter }}
             td(class="{{ node.stats | propagationTimeClass : bestBlock }}")
               div.propagationBox
               span {{node.stats.block.propagation | blockPropagationFilter}}
-            td.peerPropagationChart(class="{{node.id}}")
-              nodepropagchart(data="{{node.history.join(',')}}")
             td(class="{{ node.stats | propagationNodeAvgTimeClass : bestBlock }}") {{ node.stats | blockPropagationAvgFilter : bestBlock }}
             td(class="{{ node.stats.uptime | upTimeClass : node.stats.active }}") {{ node.stats.uptime | upTimeFilter }}
