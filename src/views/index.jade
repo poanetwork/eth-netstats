@@ -34,37 +34,31 @@ block content
 
 
     div.row(ng-cloak)
-      div.col-xs-12.stats-boxes(style="padding-top: 0px;")
+      div.col-xs-8.stats-boxes(style="padding-top: 0px;")
         div.row.second-row
-          div.col-xs-2.stat-holder.box
+          div.col-xs-3.stat-holder
             div.active-nodes(class="{{ nodesActive | nodesActiveClass : nodesTotal }}")
               i.icon-node
               span.small-title active nodes
               span.small-value {{nodesActive}}/{{nodesTotal}}
-          div.col-xs-2.stat-holder.box
+          div.col-xs-3.stat-holder
             div.gasprice.text-info
               i.icon-gasprice
               span.small-title gas price
               span.small-value {{ bestStats.gasPrice.toString() | gasPriceFilter }}
-          div.col-xs-2.stat-holder.box
-            div.gasprice.text-info
-              i.icon-gasprice
-              span.small-title gas limit
-              span.small-value {{ bestStats.block.gasLimit }} gas
-          div.col-xs-2.stat-holder.box
+          div.col-xs-3.stat-holder
             div.page-latency(class="{{ {active: true, latency: latency} | latencyClass }}")
               i.icon-clock
               span.small-title page latency
               span.small-value {{latency}} ms
-          div.col-xs-2.stat-holder.box
+          div.col-xs-3.stat-holder
             div.uptime(class="{{ upTimeTotal | upTimeClass : true }}")
               i.icon-bulb
               span.small-title uptime
               span.small-value {{ upTimeTotal | upTimeFilter }}
-          div.col-xs-2.stat-holder.box
 
         div.row
-          div.col-xs-8
+          div.col-xs-12
             div.row
               div.col-xs-3.stat-holder
                 div.big-info.chart(class="{{ avgBlockTime | avgTimeClass }}")
@@ -113,7 +107,7 @@ block content
       //- div.clearfix
 
     div.row(ng-cloak, style="padding-top: 10px")
-      table.table.table-striped
+      table.table.table-striped(style="width: 98vw;")
         thead
           tr.text-info
             th.th-nodecheck
@@ -169,3 +163,4 @@ block content
               span {{node.stats.block.propagation | blockPropagationFilter}}
             td(class="{{ node.stats | propagationNodeAvgTimeClass : bestBlock }}") {{ node.stats | blockPropagationAvgFilter : bestBlock }}
             td(class="{{ node.stats.uptime | upTimeClass : node.stats.active }}") {{ node.stats.uptime | upTimeFilter }}
+
