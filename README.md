@@ -22,6 +22,11 @@ npm install
 sudo npm install -g grunt-cli
 ```
 
+## Configuration
+In order to configure the connection between the Dashboard with the [POA Backend](https://github.com/poanetwork/poa-netstats-warehouse) you must to set the `BACKEND_SECRET` and `BACKEND_URL` environment variables or create the `backend_var.json` file in the root folder (see `backend_var.example.json` file).
+- `BACKEND_SECRET` is the secret in order to connect with the Websocket exposed by the POA Backend
+- `BACKEND_URL` is the url where the backend is listening for incoming WebSocket connections
+
 ## Build the resources
 NetStats features two versions: the full version and the lite version. In order to build the static files you have to run grunt tasks which will generate dist or dist-lite directories containing the js and css files, fonts and images.
 
