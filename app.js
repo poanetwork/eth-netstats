@@ -104,6 +104,7 @@ var handle_information = function(message_parsed) {
 	information.info = message_parsed.data.body;
 	information.id = message_parsed.agent_id;
 	information.latency = 0;
+	information.ip = message_parsed.data.body.ip;
 
 	Nodes.add(information, function (err, info)
 	{
