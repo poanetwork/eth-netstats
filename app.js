@@ -22,7 +22,6 @@ else
 	try {
 		var tmp_secret_json = require('./ws_secret.json');
 		WS_SECRET = _.values(tmp_secret_json);
-		console.log("WS_SECRET =>",WS_SECRET)
 	}
 	catch (e)
 	{
